@@ -49,20 +49,39 @@
                             <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
                         </header>
                         <!-- Preview image figure-->
-                        {% if p.head_image %}
+                        {% if post.head_image %}
                             <figure class="mb-4">
                                 <img class="img-fluid rounded"
                                      src="{{post.head_image.url}}"
-                                     alt="{{post.title}}" head_image>
+                                     alt="{{post.title}}" head_image />
                             </figure>
                         {% else %}
-                            <img class="card-img-top"
-                                 src="https://picsum.photos/seed/{{post.id}}/600/200"
-                                 alt="{{ post.title }}">
+                            <figure class="mb-4">
+                                <img class="card-img-top"
+                                     src="https://picsum.photos/seed/{{post.id}}/600/200"
+                                     alt="random_image" />
+                            </figure>
                         {% endif %}
                         <!-- Post content-->
                         <section class="mb-5">
                             <p>{{post.content}}</p>
+
+                            {% if post.file_upload%}
+                                <a href="{{post.file_upload.url }}"
+                                   class="btn btn-outline-dark" role="button" download>
+                                    Download:   
+                                    {% if post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                                        <i class="fa-solid fa-file-excel"></i>
+                                    {% elif post.get_file_ext == 'csv' %}
+                                        <i class="fa-solid fa-file-csv"></i>
+                                    {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+                                        <i class="fa-solid fa-file-word"></i>
+                                    {% else %}
+                                        <i class="fa-solid fa-file"></i>
+                                    {% endif %}
+                                    {{ post.get_file_name }}
+                                </a>
+                            {% endif %}
                         </section>
                     </article>
                     <!-- Comments section-->
