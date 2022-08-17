@@ -1,9 +1,17 @@
 {% extends 'blog/base.html' %}
 
 {% block main_area %}
+
+    {% if user.is_authenticated %}
+        {% if user.is_superuser or user.is_staff %}
+            <a class="btn btn-secondary float-end" href="/blog/create_post/" role="button">
+                <i class="fas fa-pen"></i>&nbsp;&nbsp;New Post
+            </a>
+        {% endif %}
+    {% endif %}
     <h1>Blog
-        {% if category %}<span class="badge bg-secondary">{{category}}</span>{% endif %}
-        {% if tag %}<span class="badge bg-light"><i class="fas-tags"></i>({{tag.post_set.count}})</span>{% endif %}
+        {% if category %}<span class="badge bg-secondary">{{ category }}</span>{% endif %}
+        {% if tag %}<span class="badge bg-light"><i class="fas-tags"></i>{{ tag }} ({{ tag.post_set.count }})</span>{% endif %}
     </h1>
     {% if post_list.exists %}
     {% for p in post_list %}
