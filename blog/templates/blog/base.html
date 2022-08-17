@@ -10,8 +10,8 @@
 
 <body>
   {% include 'blog/navbar.html' %}
-  <div class="container my-3">
-    <div class="row">
+  <div class="container">
+    <div class="row my-3">
       <div class="col-md-8 col-lg-9" id="main-area">
         {% block main_area %}
         {% endblock %}
@@ -33,7 +33,7 @@
           <div class="card-body">
             <div class="row">
                 <ul class="list-unstyled mb-0">
-                  {% for category in categories %}
+                  {% for category in Categories %}
                     <li><a href="{{ category.get_absolute_url }}">{{ category }} ({{ category.post_set.count }})</a>
                     </li>
                   {% endfor %}
