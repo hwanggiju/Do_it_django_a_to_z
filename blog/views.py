@@ -69,7 +69,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView) :
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
             return super(PostUpdate, self).dispatch(request, *args, **kwargs)
-        else :
+        else:
             raise PermissionDenied
 
     def form_valid(self, form):
